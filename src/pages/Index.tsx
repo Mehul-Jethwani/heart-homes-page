@@ -1,12 +1,25 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import Navbar from '@/components/Navbar';
+import Hero from '@/components/Hero';
+import BrowsePets from '@/components/BrowsePets';
+import AdoptSection from '@/components/AdoptSection';
+import SuccessStories from '@/components/SuccessStories';
+import PetCare from '@/components/PetCare';
+import GetInvolved from '@/components/GetInvolved';
+import Donate from '@/components/Donate';
+import Footer from '@/components/Footer';
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen">
+      <Navbar />
+      <Hero />
+      <BrowsePets />
+      <AdoptSection />
+      <SuccessStories />
+      <PetCare />
+      <GetInvolved />
+      <Donate />
+      <Footer />
     </div>
   );
 };
