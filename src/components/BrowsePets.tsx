@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import PetCard from './PetCard';
 import { Button } from '@/components/ui/button';
 import petDog1 from '@/assets/pet-dog1.jpg';
@@ -48,9 +49,11 @@ const BrowsePets = () => {
         </div>
 
         <div className="text-center">
-          <Button size="lg" variant="outline" className="hover:scale-105 transition-transform">
-            View All Pets
-          </Button>
+          <Link to="/browse-pets">
+            <Button size="lg" variant="outline" className="hover:scale-105 transition-transform">
+              View All Pets
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

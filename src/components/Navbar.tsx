@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { PawPrint, Menu, X } from 'lucide-react';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,13 +25,13 @@ const Navbar = () => {
   };
 
   const navLinks = [
-    { label: 'Home', id: 'hero' },
-    { label: 'Browse Pets', id: 'browse-pets' },
-    { label: 'Adopt', id: 'adopt' },
-    { label: 'Success Stories', id: 'success-stories' },
-    { label: 'Pet Care', id: 'pet-care' },
-    { label: 'Get Involved', id: 'get-involved' },
-    { label: 'Donate', id: 'donate' },
+    { label: 'Home', id: 'hero', isRoute: false },
+    { label: 'Browse Pets', id: 'browse-pets', path: '/browse-pets', isRoute: true },
+    { label: 'Adopt', id: 'adopt', isRoute: false },
+    { label: 'Success Stories', id: 'success-stories', isRoute: false },
+    { label: 'Pet Care', id: 'pet-care', isRoute: false },
+    { label: 'Get Involved', id: 'get-involved', isRoute: false },
+    { label: 'Donate', id: 'donate', isRoute: false },
   ];
 
   return (
@@ -41,25 +43,39 @@ const Navbar = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <button
-            onClick={() => scrollToSection('hero')}
+          <Link
+            to="/"
             className="flex items-center gap-2 group cursor-pointer"
           >
             <PawPrint className="w-8 h-8 text-primary group-hover:scale-110 transition-transform" />
             <span className="text-2xl font-bold text-foreground">PawConnect</span>
-          </button>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6">
-            {navLinks.map((link) => (
-              <button
-                key={link.id}
-                onClick={() => scrollToSection(link.id)}
-                className="text-foreground hover:text-primary transition-colors font-medium"
-              >
-                {link.label}
-              </button>
-            ))}
+            {navLinks.map((link) =>
+              link.isRoute ? (
+                <Link
+                  key={link.id}
+                  to={link.path!}
+                  className={`transition-colors font-medium ${
+                    location.pathname === link.path
+                      ? 'text-primary'
+                      : 'text-foreground hover:text-primary'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <button
+                  key={link.id}
+                  onClick={() => scrollToSection(link.id)}
+                  className="text-foreground hover:text-primary transition-colors font-medium"
+                >
+                  {link.label}
+                </button>
+              )
+            )}
             <Button variant="default" className="ml-4">
               Sign In
             </Button>
@@ -77,15 +93,30 @@ const Navbar = () => {
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden mt-4 pb-4 space-y-3 animate-slide-up">
-            {navLinks.map((link) => (
-              <button
-                key={link.id}
-                onClick={() => scrollToSection(link.id)}
-                className="block w-full text-left text-foreground hover:text-primary transition-colors font-medium py-2"
-              >
-                {link.label}
-              </button>
-            ))}
+            {navLinks.map((link) =>
+              link.isRoute ? (
+                <Link
+                  key={link.id}
+                  to={link.path!}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`block w-full text-left transition-colors font-medium py-2 ${
+                    location.pathname === link.path
+                      ? 'text-primary'
+                      : 'text-foreground hover:text-primary'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <button
+                  key={link.id}
+                  onClick={() => scrollToSection(link.id)}
+                  className="block w-full text-left text-foreground hover:text-primary transition-colors font-medium py-2"
+                >
+                  {link.label}
+                </button>
+              )
+            )}
             <Button variant="default" className="w-full mt-2">
               Sign In
             </Button>
