@@ -27,7 +27,7 @@ const Navbar = () => {
   const navLinks = [
     { label: 'Home', id: 'hero', isRoute: false },
     { label: 'Browse Pets', id: 'browse-pets', path: '/browse-pets', isRoute: true },
-    { label: 'Adopt', id: 'adopt', isRoute: false },
+    { label: 'Adopt', id: 'adopt', path: '/adopt', isRoute: true },
     { label: 'Success Stories', id: 'success-stories', isRoute: false },
     { label: 'Pet Care', id: 'pet-care', isRoute: false },
     { label: 'Get Involved', id: 'get-involved', isRoute: false },
