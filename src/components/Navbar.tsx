@@ -25,13 +25,13 @@ const Navbar = () => {
   };
 
   const navLinks = [
-    { label: 'Home', id: 'hero', isRoute: false },
+    { label: 'Home', id: 'hero', path: '/', isRoute: true },
     { label: 'Browse Pets', id: 'browse-pets', path: '/browse-pets', isRoute: true },
     { label: 'Adopt', id: 'adopt', path: '/adopt', isRoute: true },
-    { label: 'Success Stories', id: 'success-stories', isRoute: false },
-    { label: 'Pet Care', id: 'pet-care', isRoute: false },
-    { label: 'Get Involved', id: 'get-involved', isRoute: false },
-    { label: 'Donate', id: 'donate', isRoute: false },
+    { label: 'Success Stories', id: 'success-stories', path: '/success-stories', isRoute: true },
+    { label: 'Pet Care', id: 'pet-care', path: '/pet-care', isRoute: true },
+    { label: 'Get Involved', id: 'get-involved', path: '/get-involved', isRoute: true },
+    { label: 'Donate', id: 'donate', path: '/donate', isRoute: true },
   ];
 
   return (
@@ -53,32 +53,24 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6">
-            {navLinks.map((link) =>
-              link.isRoute ? (
-                <Link
-                  key={link.id}
-                  to={link.path!}
-                  className={`transition-colors font-medium ${
-                    location.pathname === link.path
-                      ? 'text-primary'
-                      : 'text-foreground hover:text-primary'
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              ) : (
-                <button
-                  key={link.id}
-                  onClick={() => scrollToSection(link.id)}
-                  className="text-foreground hover:text-primary transition-colors font-medium"
-                >
-                  {link.label}
-                </button>
-              )
-            )}
-            <Button variant="default" className="ml-4">
-              Sign In
-            </Button>
+            {navLinks.map((link) => (
+              <Link
+                key={link.id}
+                to={link.path!}
+                className={`transition-colors font-medium ${
+                  location.pathname === link.path
+                    ? 'text-primary'
+                    : 'text-foreground hover:text-primary'
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+            <Link to="/sign-in">
+              <Button variant="default" className="ml-4">
+                Sign In
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -93,33 +85,25 @@ const Navbar = () => {
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden mt-4 pb-4 space-y-3 animate-slide-up">
-            {navLinks.map((link) =>
-              link.isRoute ? (
-                <Link
-                  key={link.id}
-                  to={link.path!}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className={`block w-full text-left transition-colors font-medium py-2 ${
-                    location.pathname === link.path
-                      ? 'text-primary'
-                      : 'text-foreground hover:text-primary'
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              ) : (
-                <button
-                  key={link.id}
-                  onClick={() => scrollToSection(link.id)}
-                  className="block w-full text-left text-foreground hover:text-primary transition-colors font-medium py-2"
-                >
-                  {link.label}
-                </button>
-              )
-            )}
-            <Button variant="default" className="w-full mt-2">
-              Sign In
-            </Button>
+            {navLinks.map((link) => (
+              <Link
+                key={link.id}
+                to={link.path!}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={`block w-full text-left transition-colors font-medium py-2 ${
+                  location.pathname === link.path
+                    ? 'text-primary'
+                    : 'text-foreground hover:text-primary'
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+            <Link to="/sign-in">
+              <Button variant="default" className="w-full mt-2">
+                Sign In
+              </Button>
+            </Link>
           </div>
         )}
       </div>
