@@ -1,4 +1,5 @@
 import Navbar from '@/components/Navbar';
+import ContactUs from '@/components/ContactUs';
 import Footer from '@/components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -32,10 +33,10 @@ const DonatePage = () => {
       <section className="pt-32 pb-16 bg-gradient-to-b from-secondary/30 to-background">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6 animate-fade-in">
-            Your Support Saves Lives
+            Every Bit Helps Save Lives 💖
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in">
-            Every donation helps us rescue, care for, and rehome animals in need
+            Your kindness gives these babies a second chance at happiness
           </p>
         </div>
       </section>
@@ -70,9 +71,9 @@ const DonatePage = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-foreground mb-4">Make a Donation</h2>
+              <h2 className="text-4xl font-bold text-foreground mb-4">Make a Donation 🎁</h2>
               <p className="text-lg text-muted-foreground">
-                Choose an amount or enter your own to help animals in need
+                Pick an amount (or add your own!) to help our furry friends
               </p>
             </div>
 
@@ -127,7 +128,7 @@ const DonatePage = () => {
                   disabled={!selectedAmount && !customAmount}
                 >
                   <Heart className="w-5 h-5 mr-2" />
-                  Donate Now
+                  Send the Love
                 </Button>
 
                 <p className="text-sm text-muted-foreground text-center">
@@ -142,7 +143,7 @@ const DonatePage = () => {
       {/* How Donations Help */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center text-foreground mb-12">How Your Donation Helps</h2>
+          <h2 className="text-4xl font-bold text-center text-foreground mb-12">Where Your Money Goes 💰</h2>
           <div className="max-w-4xl mx-auto space-y-6">
             <Card className="p-6 hover:shadow-lg transition-shadow">
               <div className="flex items-start gap-4">
@@ -203,6 +204,7 @@ const DonatePage = () => {
         </div>
       </section>
 
+      <ContactUs />
       <Footer />
     </div>
   );

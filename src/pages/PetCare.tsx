@@ -1,4 +1,5 @@
 import Navbar from '@/components/Navbar';
+import ContactUs from '@/components/ContactUs';
 import Footer from '@/components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -21,10 +22,10 @@ const PetCare = () => {
         </div>
         <div className="container mx-auto px-4 text-center relative z-10">
           <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6 animate-fade-in">
-            Caring for Your Furry Friends
+            Keep Your Fur Babies Happy! 🐕‍🦺
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in">
-            Expert tips and trusted resources to keep your pets happy and healthy
+            Simple tips and tricks to make sure your pets stay healthy and full of joy
           </p>
         </div>
       </section>
@@ -32,7 +33,7 @@ const PetCare = () => {
       {/* Vet Care Tips Section */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center text-foreground mb-12">Essential Vet Care Tips</h2>
+          <h2 className="text-4xl font-bold text-center text-foreground mb-12">The Essentials 💊</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <Card className="text-center p-6 hover:shadow-xl transition-all duration-300 hover:scale-105">
               <Stethoscope className="w-12 h-12 text-primary mx-auto mb-4" />
@@ -82,19 +83,19 @@ const PetCare = () => {
             </div>
             <div>
               <h2 className="text-4xl font-bold text-foreground mb-6">
-                Grooming & Hygiene
+                Grooming & Looking Good ✂️
               </h2>
               <p className="text-muted-foreground mb-4 leading-relaxed">
-                Regular grooming is essential for your pet's health and comfort. Brushing removes loose fur, prevents matting, and distributes natural oils that keep their coat shiny and skin healthy.
+                Your pet deserves to look and feel their best! Regular brushing keeps their coat shiny, prevents those pesky tangles, and helps spread the natural oils that keep their skin healthy.
               </p>
               <p className="text-muted-foreground mb-4 leading-relaxed">
-                Bathing helps remove dirt and allergens, while nail trimming prevents painful overgrowth. Professional groomers can also spot early signs of skin issues, parasites, or other health concerns.
+                Bath time removes dirt and keeps allergies at bay, while trimming those nails prevents discomfort. Plus, groomers can spot health issues early!
               </p>
               <p className="text-muted-foreground mb-6 leading-relaxed">
-                Regular grooming sessions also strengthen the bond between you and your pet, making it a positive experience for both of you.
+                Best part? These grooming sessions are bonding time with your furry friend. Win-win!
               </p>
               <Button size="lg" asChild>
-                <a href="/get-involved">Book a Groomer</a>
+                <a href="/get-involved">Find a Groomer</a>
               </Button>
             </div>
           </div>
@@ -105,13 +106,13 @@ const PetCare = () => {
       <section className="py-16 bg-primary/5">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl font-bold text-center text-foreground mb-8">Emergency Care & Consultation</h2>
+            <h2 className="text-4xl font-bold text-center text-foreground mb-8">When to Worry 🚨</h2>
             <p className="text-center text-muted-foreground mb-8 text-lg">
-              Know the warning signs that require immediate veterinary attention
+              Watch out for these signs that mean you should call the vet right away!
             </p>
             
             <Card className="p-8 mb-8">
-              <h3 className="text-2xl font-bold text-foreground mb-6">Emergency Warning Signs:</h3>
+              <h3 className="text-2xl font-bold text-foreground mb-6">Emergency Signs to Watch For:</h3>
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
@@ -150,7 +151,7 @@ const PetCare = () => {
 
             <div className="text-center">
               <Button size="lg" asChild>
-                <a href="/get-involved">Consult a Vet Now</a>
+                <a href="/get-involved">Get Help Now</a>
               </Button>
             </div>
           </div>
@@ -160,7 +161,7 @@ const PetCare = () => {
       {/* Pet Wellness Articles */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center text-foreground mb-12">Pet Wellness Articles</h2>
+          <h2 className="text-4xl font-bold text-center text-foreground mb-12">Learn More 📚</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:scale-105">
               <div className="aspect-video overflow-hidden">
@@ -233,6 +234,7 @@ const PetCare = () => {
         </div>
       </section>
 
+      <ContactUs />
       <Footer />
     </div>
   );

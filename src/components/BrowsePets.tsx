@@ -35,10 +35,10 @@ const BrowsePets = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12 animate-fade-in">
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Meet Our Lovely Pets
+            Who's Waiting for You? 🐾
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Browse through our adorable pets waiting for their forever homes
+            These cuties are ready to fill your life with love and happiness!
           </p>
         </div>
 
@@ -50,8 +50,8 @@ const BrowsePets = () => {
 
         <div className="text-center">
           <Link to="/browse-pets">
-            <Button size="lg" variant="outline" className="hover:scale-105 transition-transform">
-              View All Pets
+            <Button size="lg" variant="outline" className="hover:scale-105 transition-all duration-300">
+              See All Our Friends
             </Button>
           </Link>
         </div>

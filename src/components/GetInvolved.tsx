@@ -8,10 +8,10 @@ const GetInvolved = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12 animate-fade-in">
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Get Involved
+            Join the Pack! 🤝
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Join our community of animal lovers and make a difference in the lives of pets in need
+            Be part of something amazing — help us give every pet a chance at happiness
           </p>
         </div>
 
@@ -67,8 +67,8 @@ const GetInvolved = () => {
         </div>
 
         <div className="text-center">
-          <Button size="lg" className="hover:scale-105 transition-transform">
-            Join Our Team
+          <Button size="lg" className="hover:scale-105 transition-all duration-300">
+            Count Me In!
           </Button>
         </div>
       </div>

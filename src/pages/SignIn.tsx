@@ -1,4 +1,5 @@
 import Navbar from '@/components/Navbar';
+import ContactUs from '@/components/ContactUs';
 import Footer from '@/components/Footer';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -35,8 +36,8 @@ const SignIn = () => {
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-full mb-4">
                   <PawPrint className="w-8 h-8 text-primary" />
                 </div>
-                <h1 className="text-3xl font-bold text-foreground mb-2">Welcome Back</h1>
-                <p className="text-muted-foreground">Sign in to your PawConnect account</p>
+                <h1 className="text-3xl font-bold text-foreground mb-2">Hey There! 👋</h1>
+                <p className="text-muted-foreground">Welcome back to your PawConnect family</p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -67,7 +68,7 @@ const SignIn = () => {
                 </div>
 
                 <Button type="submit" size="lg" className="w-full">
-                  Sign In
+                  Let's Go!
                 </Button>
 
                 <div className="text-center">
@@ -82,9 +83,9 @@ const SignIn = () => {
 
               <div className="mt-8 pt-6 border-t border-border text-center">
                 <p className="text-sm text-muted-foreground">
-                  Don't have an account?{' '}
+                  New here?{' '}
                   <button className="text-primary hover:underline font-medium">
-                    Sign up
+                    Join the family!
                   </button>
                 </p>
               </div>
@@ -93,6 +94,7 @@ const SignIn = () => {
         </div>
       </section>
 
+      <ContactUs />
       <Footer />
     </div>
   );

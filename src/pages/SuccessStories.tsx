@@ -1,4 +1,5 @@
 import Navbar from '@/components/Navbar';
+import ContactUs from '@/components/ContactUs';
 import Footer from '@/components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -86,10 +87,10 @@ const SuccessStories = () => {
       <section className="pt-32 pb-16 bg-gradient-to-b from-secondary/30 to-background">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6 animate-fade-in">
-            Heartwarming Success Stories
+            Tales of Love & Joy 💕
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in">
-            Every adoption is a new beginning. Meet our happy families.
+            Real families, real happiness — see how adoption changed everything!
           </p>
         </div>
       </section>
@@ -125,7 +126,7 @@ const SuccessStories = () => {
       {/* Featured Story */}
       <section className="py-16 bg-secondary/30">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center text-foreground mb-12">Featured Story</h2>
+          <h2 className="text-4xl font-bold text-center text-foreground mb-12">One Special Story ✨</h2>
           <div className="max-w-5xl mx-auto bg-card rounded-lg overflow-hidden shadow-lg">
             <div className="grid md:grid-cols-2 gap-0">
               <div className="aspect-square md:aspect-auto">
@@ -143,7 +144,7 @@ const SuccessStories = () => {
                   <Quote className="w-6 h-6 text-primary mb-2" />
                   <p className="text-foreground italic">{featuredStory.quote}</p>
                 </div>
-                <Button>Read More Stories</Button>
+                <Button>More Heartwarming Stories</Button>
               </div>
             </div>
           </div>
@@ -154,9 +155,9 @@ const SuccessStories = () => {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto text-center mb-12">
-            <h2 className="text-4xl font-bold text-foreground mb-4">Share Your Story</h2>
+            <h2 className="text-4xl font-bold text-foreground mb-4">Share Your Story! 📸</h2>
             <p className="text-lg text-muted-foreground">
-              Have you adopted a pet through PawConnect? We'd love to hear your story!
+              Did you adopt through us? We're dying to hear how it's going!
             </p>
           </div>
           
@@ -198,13 +199,14 @@ const SuccessStories = () => {
               </div>
               
               <Button type="submit" size="lg" className="w-full">
-                Submit Story
+                Share the Love!
               </Button>
             </div>
           </form>
         </div>
       </section>
 
+      <ContactUs />
       <Footer />
     </div>
   );

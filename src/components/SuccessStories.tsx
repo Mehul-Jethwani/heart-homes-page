@@ -32,10 +32,10 @@ const SuccessStories = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12 animate-fade-in">
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Success Stories
+            Happy Tails 💕
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Read heartwarming stories from families who found their perfect companions
+            Real stories from families who found love on four paws
           </p>
         </div>
 
@@ -62,8 +62,8 @@ const SuccessStories = () => {
         </div>
 
         <div className="text-center">
-          <Button size="lg" variant="outline" className="hover:scale-105 transition-transform">
-            Read More Stories
+          <Button size="lg" variant="outline" className="hover:scale-105 transition-all duration-300">
+            More Happy Stories
           </Button>
         </div>
       </div>

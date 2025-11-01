@@ -1,4 +1,5 @@
 import Navbar from '@/components/Navbar';
+import ContactUs from '@/components/ContactUs';
 import Footer from '@/components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -36,10 +37,10 @@ const GetInvolved = () => {
       <section className="pt-32 pb-16 bg-gradient-to-b from-secondary/30 to-background">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6 animate-fade-in">
-            Get Involved
+            Come Be Part of the Team! 🤗
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in">
-            Join our community of animal lovers and make a difference in pets' lives
+            Whether you have an hour or a day, your help makes all the difference to these little souls
           </p>
         </div>
       </section>
@@ -96,15 +97,16 @@ const GetInvolved = () => {
             </div>
             <div>
               <h2 className="text-4xl font-bold text-foreground mb-6">
-                Become a Volunteer
+                Become a Hero!
               </h2>
               <p className="text-muted-foreground mb-6 leading-relaxed">
-                Our volunteers are the heart of PawConnect. Whether you have a few hours a week or can only help occasionally, every contribution matters. From walking dogs and socializing cats to helping with administrative tasks and fundraising events, there's a role for everyone.
+                Our volunteers are what make everything possible! Got a few hours to spare? We'd love to have you! 
+                Walk dogs, cuddle cats, help at events, or just spread the word. Whatever you can do, it means the world to us and the pets.
               </p>
               <p className="text-muted-foreground mb-6 leading-relaxed">
-                Volunteering is not just about helping animals—it's about joining a community of passionate people who share your love for pets. You'll make lasting friendships while making a real difference.
+                Plus, you'll meet some of the most amazing people and animals along the way. It's not just volunteering—it's joining a family!
               </p>
-              <Button size="lg">Join Our Team</Button>
+              <Button size="lg">I Want to Help!</Button>
             </div>
           </div>
         </div>
@@ -114,9 +116,9 @@ const GetInvolved = () => {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto text-center mb-12">
-            <h2 className="text-4xl font-bold text-foreground mb-4">Sign Up to Volunteer</h2>
+            <h2 className="text-4xl font-bold text-foreground mb-4">Sign Up to Volunteer 📝</h2>
             <p className="text-lg text-muted-foreground">
-              Fill out the form below and we'll reach out with more information
+              Fill this out and we'll reach out real soon with all the details!
             </p>
           </div>
           
@@ -180,13 +182,14 @@ const GetInvolved = () => {
               </div>
               
               <Button type="submit" size="lg" className="w-full">
-                Submit Application
+                Count Me In!
               </Button>
             </div>
           </form>
         </div>
       </section>
 
+      <ContactUs />
       <Footer />
     </div>
   );

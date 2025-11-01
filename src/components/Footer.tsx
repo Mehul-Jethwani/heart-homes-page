@@ -12,7 +12,7 @@ const Footer = () => {
               <span className="text-2xl font-bold text-foreground">PawConnect</span>
             </div>
             <p className="text-muted-foreground">
-              Connecting paws with loving homes since 2020
+              Connecting paws with loving homes since 2020 🐾
             </p>
           </div>
 
@@ -95,7 +95,7 @@ const Footer = () => {
         {/* Social & Copyright */}
         <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-muted-foreground text-sm">
-            Copyright © PawConnect 2025 – Made with ❤️ for pets
+            Copyright © PawConnect 2025 – Made with ❤️ for all the furry souls
           </p>
           <div className="flex gap-4">
             <a 

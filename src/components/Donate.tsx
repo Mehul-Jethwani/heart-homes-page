@@ -9,11 +9,11 @@ const Donate = () => {
         <div className="max-w-4xl mx-auto text-center animate-fade-in">
           <Heart className="w-16 h-16 text-primary mx-auto mb-6" />
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-            Support Our Mission
+            Help Us Save More Lives 💝
           </h2>
           <p className="text-xl text-muted-foreground mb-12 leading-relaxed">
-            Your generous donations help us rescue, care for, and find loving homes for animals in need. 
-            Every contribution, no matter the size, makes a real difference.
+            Every little bit helps! Your support means we can rescue more pets, give them medical care, 
+            and find them loving forever homes. Together, we're changing lives!
           </p>
 
           <div className="grid md:grid-cols-3 gap-6 mb-12">
@@ -43,11 +43,11 @@ const Donate = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button size="lg" className="px-8 hover:scale-105 transition-transform">
-              Donate Now
+            <Button size="lg" className="px-8 hover:scale-105 transition-all duration-300">
+              Give a Little Love
             </Button>
-            <Button size="lg" variant="outline" className="px-8 hover:scale-105 transition-transform">
-              Become a Monthly Donor
+            <Button size="lg" variant="outline" className="px-8 hover:scale-105 transition-all duration-300">
+              Support Monthly
             </Button>
           </div>
 

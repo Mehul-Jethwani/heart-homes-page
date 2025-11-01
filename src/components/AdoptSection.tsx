@@ -9,11 +9,11 @@ const AdoptSection = () => {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="animate-fade-in">
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-              Adopt a Friend
+              Ready to Adopt? 🏡
             </h2>
             <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-              Finding your perfect companion has never been easier. Our simple adoption process
-              ensures that every pet finds a loving, caring home where they'll be cherished forever.
+              We've made adopting super simple! Our process helps you find the perfect furry companion
+              who'll fit right into your family and fill your home with love.
             </p>
 
             <div className="space-y-4 mb-8">
@@ -48,8 +48,8 @@ const AdoptSection = () => {
               </div>
             </div>
 
-            <Button size="lg" className="hover:scale-105 transition-transform">
-              Start Adoption Process
+            <Button size="lg" className="hover:scale-105 transition-all duration-300">
+              Let's Get You a Furry Friend!
             </Button>
           </div>
 

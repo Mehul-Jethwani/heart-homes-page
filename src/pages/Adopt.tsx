@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
+import ContactUs from '@/components/ContactUs';
 import Footer from '@/components/Footer';
 import PetCard from '@/components/PetCard';
 import { Button } from '@/components/ui/button';
@@ -92,17 +93,17 @@ const Adopt = () => {
         </div>
         <div className="relative z-10 container mx-auto px-4 text-center animate-fade-in">
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-            Adopt Your New Best Friend
+            Your New Best Friend Awaits! 🐾
           </h1>
           <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto">
-            Bring home love, loyalty, and endless cuddles. Adoption saves lives.
+            Ready for wagging tails and purring cuddles? Let's find your perfect match!
           </p>
           <Button 
             size="lg" 
             onClick={() => navigate('/browse-pets')}
-            className="hover:scale-105 transition-transform"
+            className="hover:scale-105 transition-all duration-300"
           >
-            Browse Pets
+            See Who's Waiting
           </Button>
         </div>
       </section>
@@ -111,7 +112,7 @@ const Adopt = () => {
       <section className="py-20 bg-card">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl md:text-5xl font-bold text-center text-foreground mb-16 animate-fade-in">
-            How Adoption Works
+            How It Works 📝
           </h2>
           <div className="grid md:grid-cols-4 gap-8">
             {adoptionSteps.map((step, index) => {
@@ -138,7 +139,7 @@ const Adopt = () => {
       <section className="py-20">
         <div className="container mx-auto px-4 max-w-2xl">
           <h2 className="text-4xl md:text-5xl font-bold text-center text-foreground mb-12 animate-fade-in">
-            Apply for Adoption
+            Let's Get Started!
           </h2>
           <form onSubmit={handleSubmit} className="bg-card rounded-2xl p-8 shadow-lg animate-scale-in">
             <div className="space-y-6">
@@ -207,8 +208,8 @@ const Adopt = () => {
                 />
               </div>
 
-              <Button type="submit" size="lg" className="w-full hover:scale-105 transition-transform">
-                Submit Application
+              <Button type="submit" size="lg" className="w-full hover:scale-105 transition-all duration-300">
+                Send My Application!
               </Button>
             </div>
           </form>
@@ -219,7 +220,7 @@ const Adopt = () => {
       <section className="py-20 bg-card">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl md:text-5xl font-bold text-center text-foreground mb-12 animate-fade-in">
-            Featured Pets
+            Some of Our Stars ⭐
           </h2>
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-12">
             {featuredPets.map((pet, index) => (
@@ -233,14 +234,15 @@ const Adopt = () => {
               size="lg"
               variant="outline"
               onClick={() => navigate('/browse-pets')}
-              className="hover:scale-105 transition-transform"
+              className="hover:scale-105 transition-all duration-300"
             >
-              View All Pets
+              Meet All the Gang
             </Button>
           </div>
         </div>
       </section>
 
+      <ContactUs />
       <Footer />
     </div>
   );

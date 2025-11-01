@@ -6,6 +6,7 @@ import SuccessStories from '@/components/SuccessStories';
 import PetCare from '@/components/PetCare';
 import GetInvolved from '@/components/GetInvolved';
 import Donate from '@/components/Donate';
+import ContactUs from '@/components/ContactUs';
 import Footer from '@/components/Footer';
 
 const Index = () => {
@@ -19,6 +20,7 @@ const Index = () => {
       <PetCare />
       <GetInvolved />
       <Donate />
+      <ContactUs />
       <Footer />
     </div>
   );

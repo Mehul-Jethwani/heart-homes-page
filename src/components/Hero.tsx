@@ -24,18 +24,18 @@ const Hero = () => {
       {/* Content */}
       <div className="container mx-auto px-4 relative z-10 text-center animate-fade-in">
         <h1 className="text-5xl md:text-7xl font-bold text-foreground mb-6 leading-tight">
-          Find Your Perfect <br />
-          <span className="text-primary">Paw Partner</span>
+          Meet Your New <br />
+          <span className="text-primary">Best Friend 🐶</span>
         </h1>
         <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-          Connecting paws with loving homes — one adoption at a time.
+          Where furry friends find forever homes, and families find unconditional love ❤️
         </p>
         <Button 
           size="lg" 
-          className="text-lg px-8 py-6 hover:scale-105 transition-transform shadow-lg"
+          className="text-lg px-8 py-6 hover:scale-105 transition-all duration-300 shadow-lg"
           onClick={scrollToBrowse}
         >
-          Browse Pets
+          Let's Find Your Pet!
         </Button>
       </div>
 

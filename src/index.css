@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -95,6 +97,61 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground font-sans;
+  }
+}
+
+/* Human-crafted spacing variations */
+@layer utilities {
+  .py-human-sm { padding-top: 3.2rem; padding-bottom: 2.8rem; }
+  .py-human-md { padding-top: 4.5rem; padding-bottom: 3.9rem; }
+  .py-human-lg { padding-top: 5.3rem; padding-bottom: 4.7rem; }
+  
+  .px-human-sm { padding-left: 1.2rem; padding-right: 0.9rem; }
+  .px-human-md { padding-left: 2.1rem; padding-right: 1.8rem; }
+  
+  .mb-human-sm { margin-bottom: 1.8rem; }
+  .mb-human-md { margin-bottom: 3.2rem; }
+  .mb-human-lg { margin-bottom: 4.8rem; }
+  
+  .gap-human { gap: 2.3rem; }
+  
+  /* Organic shadows */
+  .shadow-organic {
+    box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.08), 
+                0 2px 6px -1px rgba(0, 0, 0, 0.04);
+  }
+  
+  .shadow-organic-lg {
+    box-shadow: 0 10px 28px -4px rgba(0, 0, 0, 0.12), 
+                0 4px 10px -2px rgba(0, 0, 0, 0.06);
+  }
+  
+  /* Subtle animations */
+  @keyframes gentle-float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-4px); }
+  }
+  
+  @keyframes gentle-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.85; }
+  }
+  
+  .animate-gentle-float {
+    animation: gentle-float 3s ease-in-out infinite;
+  }
+  
+  .animate-gentle-pulse {
+    animation: gentle-pulse 2.5s ease-in-out infinite;
+  }
+  
+  /* Imperfect border radius */
+  .rounded-organic {
+    border-radius: 1.2rem 0.8rem 1rem 0.9rem;
+  }
+  
+  .rounded-organic-lg {
+    border-radius: 1.8rem 1.3rem 1.5rem 1.4rem;
   }
 }
 

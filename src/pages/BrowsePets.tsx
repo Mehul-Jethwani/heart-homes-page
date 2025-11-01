@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Navbar from '@/components/Navbar';
+import ContactUs from '@/components/ContactUs';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -107,10 +108,10 @@ const BrowsePets = () => {
           {/* Header */}
           <div className="text-center mb-12 animate-fade-in">
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Find Your New Best Friend
+              Meet Your New Best Friend! 🐕
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Browse our list of adorable pets waiting for a loving home
+              All these adorable paws are waiting to meet you — find your perfect match!
             </p>
           </div>
 
@@ -179,8 +180,8 @@ const BrowsePets = () => {
                   </div>
                 </CardContent>
                 <CardFooter className="p-4 pt-0">
-                  <Button className="w-full hover:scale-105 transition-transform">
-                    {pet.status === 'Available' ? 'Adopt Me' : 'View Profile'}
+                  <Button className="w-full hover:scale-105 transition-all duration-300">
+                    {pet.status === 'Available' ? 'I Want This One!' : 'Learn More'}
                   </Button>
                 </CardFooter>
               </Card>
@@ -197,6 +198,7 @@ const BrowsePets = () => {
         </div>
       </main>
 
+      <ContactUs />
       <Footer />
     </div>
   );
