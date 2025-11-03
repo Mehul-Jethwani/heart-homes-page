@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Heart, Home, Users } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import familyImage from '@/assets/family-adoption.jpg';
 
 const AdoptSection = () => {
@@ -48,9 +49,11 @@ const AdoptSection = () => {
               </div>
             </div>
 
-            <Button size="lg" className="hover:scale-105 transition-all duration-300">
-              Let's Get You a Furry Friend!
-            </Button>
+            <Link to="/adopt">
+              <Button size="lg" className="hover:scale-105 transition-all duration-300">
+                Let's Get You a Furry Friend!
+              </Button>
+            </Link>
           </div>
 
           <div className="animate-scale-in">

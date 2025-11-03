@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { Link } from 'react-router-dom';
 import { DollarSign, Heart } from 'lucide-react';
 
 const Donate = () => {
@@ -43,12 +44,16 @@ const Donate = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button size="lg" className="px-8 hover:scale-105 transition-all duration-300">
-              Give a Little Love
-            </Button>
-            <Button size="lg" variant="outline" className="px-8 hover:scale-105 transition-all duration-300">
-              Support Monthly
-            </Button>
+            <Link to="/donate">
+              <Button size="lg" className="px-8 hover:scale-105 transition-all duration-300">
+                Give a Little Love
+              </Button>
+            </Link>
+            <Link to="/donate">
+              <Button size="lg" variant="outline" className="px-8 hover:scale-105 transition-all duration-300">
+                Support Monthly
+              </Button>
+            </Link>
           </div>
 
           <p className="text-sm text-muted-foreground mt-8">

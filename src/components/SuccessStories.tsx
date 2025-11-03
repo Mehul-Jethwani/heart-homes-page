@@ -1,5 +1,6 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 import { Quote } from 'lucide-react';
 
 const stories = [
@@ -62,9 +63,11 @@ const SuccessStories = () => {
         </div>
 
         <div className="text-center">
-          <Button size="lg" variant="outline" className="hover:scale-105 transition-all duration-300">
-            More Happy Stories
-          </Button>
+          <Link to="/success-stories">
+            <Button size="lg" variant="outline" className="hover:scale-105 transition-all duration-300">
+              More Happy Stories
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

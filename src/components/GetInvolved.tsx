@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 import { HandHeart, CalendarDays, Share2 } from 'lucide-react';
 import volunteersImage from '@/assets/volunteers.jpg';
 
@@ -67,9 +68,11 @@ const GetInvolved = () => {
         </div>
 
         <div className="text-center">
-          <Button size="lg" className="hover:scale-105 transition-all duration-300">
-            Count Me In!
-          </Button>
+          <Link to="/get-involved">
+            <Button size="lg" className="hover:scale-105 transition-all duration-300">
+              Count Me In!
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

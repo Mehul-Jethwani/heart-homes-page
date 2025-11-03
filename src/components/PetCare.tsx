@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 import { Stethoscope, Scissors, BookOpen } from 'lucide-react';
 import vetImage from '@/assets/vet-care.jpg';
 
@@ -56,9 +57,11 @@ const PetCare = () => {
               </div>
             </div>
 
-            <Button size="lg" className="hover:scale-105 transition-transform">
-              Learn More About Pet Care
-            </Button>
+            <Link to="/pet-care">
+              <Button size="lg" className="hover:scale-105 transition-transform">
+                Learn More About Pet Care
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
