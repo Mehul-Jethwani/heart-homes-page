@@ -1,12 +1,18 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { PawPrint, Menu, X } from 'lucide-react';
+import { PawPrint, Menu, X, LogOut } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
+import { Session } from '@supabase/supabase-js';
+import { useToast } from '@/hooks/use-toast';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [session, setSession] = useState<Session | null>(null);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { toast } = useToast();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,6 +21,29 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    toast({
+      title: "Signed out successfully",
+      description: "Hope to see you again soon!",
+    });
+    navigate('/');
+  };
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -66,11 +95,18 @@ const Navbar = () => {
                 {link.label}
               </Link>
             ))}
-            <Link to="/sign-in">
-              <Button variant="default" className="ml-4">
-                Sign In
+            {session ? (
+              <Button variant="default" className="ml-4" onClick={handleLogout}>
+                <LogOut className="w-4 h-4 mr-2" />
+                Logout
               </Button>
-            </Link>
+            ) : (
+              <Link to="/sign-in">
+                <Button variant="default" className="ml-4">
+                  Sign In
+                </Button>
+              </Link>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -99,11 +135,18 @@ const Navbar = () => {
                 {link.label}
               </Link>
             ))}
-            <Link to="/sign-in">
-              <Button variant="default" className="w-full mt-2">
-                Sign In
+            {session ? (
+              <Button variant="default" className="w-full mt-2" onClick={handleLogout}>
+                <LogOut className="w-4 h-4 mr-2" />
+                Logout
               </Button>
-            </Link>
+            ) : (
+              <Link to="/sign-in">
+                <Button variant="default" className="w-full mt-2">
+                  Sign In
+                </Button>
+              </Link>
+            )}
           </div>
         )}
       </div>

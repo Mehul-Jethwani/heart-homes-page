@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import ContactUs from '@/components/ContactUs';
 import Footer from '@/components/Footer';
@@ -6,8 +7,9 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Quote, Heart } from 'lucide-react';
-import { useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
+import { Session } from '@supabase/supabase-js';
 
 const stories = [
   {
@@ -31,28 +33,16 @@ const stories = [
     story: 'Mittens has become such an important part of our family. We can\'t imagine life without her now!',
     image: 'https://images.unsplash.com/photo-1573865526739-10c1d3a1f0e3?w=400&h=400&fit=crop',
   },
-  {
-    id: 4,
-    pet: 'Buddy',
-    owner: 'Rahul & Anita',
-    story: 'Buddy is the most loyal and loving dog we could have asked for. He completes our home.',
-    image: 'https://images.unsplash.com/photo-1560807707-8cc77767d783?w=400&h=400&fit=crop',
-  },
-  {
-    id: 5,
-    pet: 'Whiskers',
-    owner: 'Emily Johnson',
-    story: 'Whiskers is such a gentle soul. Adopting her was the best decision I ever made!',
-    image: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&h=400&fit=crop',
-  },
-  {
-    id: 6,
-    pet: 'Max',
-    owner: 'The Patel Family',
-    story: 'Max brings energy and happiness to our home. Our kids absolutely adore him!',
-    image: 'https://images.unsplash.com/photo-1552053831-71594a27632d?w=400&h=400&fit=crop',
-  },
 ];
+
+interface Story {
+  id: string;
+  user_id: string;
+  title: string;
+  content: string;
+  image_url: string | null;
+  created_at: string;
+}
 
 const featuredStory = {
   pet: 'Coco',
@@ -64,19 +54,83 @@ const featuredStory = {
 
 const SuccessStories = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    petName: '',
-    story: '',
+    title: '',
+    content: '',
   });
+  const [dbStories, setDbStories] = useState<Story[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [session, setSession] = useState<Session | null>(null);
   const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast({
-      title: "Thank you for sharing your story! ❤️",
-      description: "Your story will inspire others to adopt.",
+  useEffect(() => {
+    fetchStories();
+    
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
     });
-    setFormData({ name: '', petName: '', story: '' });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const fetchStories = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('stories')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setDbStories(data || []);
+    } catch (error: any) {
+      console.error('Error fetching stories:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!session) {
+      toast({
+        title: "Please sign in",
+        description: "You need to be signed in to share your story.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    try {
+      const { error } = await supabase
+        .from('stories')
+        .insert([{
+          user_id: session.user.id,
+          title: formData.title,
+          content: formData.content,
+        }]);
+
+      if (error) throw error;
+
+      toast({
+        title: "Thank you for sharing your story! ❤️",
+        description: "Your story will inspire others to adopt.",
+      });
+      
+      setFormData({ title: '', content: '' });
+      fetchStories();
+    } catch (error: any) {
+      toast({
+        title: "Failed to submit story",
+        description: error.message,
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -98,28 +152,67 @@ const SuccessStories = () => {
       {/* Story Gallery */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {stories.map((story) => (
-              <Card key={story.id} className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:scale-105 animate-scale-in relative">
-                <Heart className="absolute top-4 right-4 w-6 h-6 text-primary z-10 fill-primary" />
-                <div className="aspect-square overflow-hidden">
-                  <img 
-                    src={story.image} 
-                    alt={story.pet} 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <CardContent className="p-6">
-                  <Quote className="w-8 h-8 text-primary mb-4" />
-                  <p className="text-muted-foreground mb-4 italic">"{story.story}"</p>
-                  <div>
-                    <p className="font-semibold text-foreground">{story.pet}</p>
-                    <p className="text-sm text-muted-foreground">Adopted by {story.owner}</p>
+          <h2 className="text-4xl font-bold text-center text-foreground mb-12">Community Stories 💕</h2>
+          
+          {loading ? (
+            <div className="flex justify-center py-12">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+            </div>
+          ) : (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                {stories.map((story) => (
+                  <Card key={story.id} className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:scale-105 animate-scale-in relative">
+                    <Heart className="absolute top-4 right-4 w-6 h-6 text-primary z-10 fill-primary" />
+                    <div className="aspect-square overflow-hidden">
+                      <img 
+                        src={story.image} 
+                        alt={story.pet} 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <CardContent className="p-6">
+                      <Quote className="w-8 h-8 text-primary mb-4" />
+                      <p className="text-muted-foreground mb-4 italic">"{story.story}"</p>
+                      <div>
+                        <p className="font-semibold text-foreground">{story.pet}</p>
+                        <p className="text-sm text-muted-foreground">Adopted by {story.owner}</p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+
+              {dbStories.length > 0 && (
+                <>
+                  <h3 className="text-3xl font-bold text-center text-foreground mb-8 mt-16">
+                    More Amazing Stories from Our Community
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {dbStories.map((story) => (
+                      <Card key={story.id} className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:scale-105 relative">
+                        <Heart className="absolute top-4 right-4 w-6 h-6 text-primary z-10 fill-primary" />
+                        {story.image_url && (
+                          <div className="aspect-square overflow-hidden">
+                            <img 
+                              src={story.image_url} 
+                              alt={story.title} 
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        )}
+                        <CardContent className="p-6">
+                          <h4 className="text-xl font-bold text-foreground mb-3">{story.title}</h4>
+                          <Quote className="w-6 h-6 text-primary mb-2" />
+                          <p className="text-muted-foreground italic">{story.content}</p>
+                        </CardContent>
+                      </Card>
+                    ))}
                   </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+                </>
+              )}
+            </>
+          )}
         </div>
       </section>
 
@@ -164,24 +257,13 @@ const SuccessStories = () => {
           <form onSubmit={handleSubmit} className="max-w-2xl mx-auto bg-card p-8 rounded-lg shadow-lg">
             <div className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-foreground mb-2">Your Name</label>
+                <label className="block text-sm font-medium text-foreground mb-2">Story Title</label>
                 <Input
                   type="text"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  value={formData.title}
+                  onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                   required
-                  placeholder="Enter your name"
-                />
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">Pet Name</label>
-                <Input
-                  type="text"
-                  value={formData.petName}
-                  onChange={(e) => setFormData({ ...formData, petName: e.target.value })}
-                  required
-                  placeholder="Enter your pet's name"
+                  placeholder="e.g., How Max Changed Our Lives"
                 />
               </div>
               
@@ -190,16 +272,16 @@ const SuccessStories = () => {
                   Your Adoption Story
                 </label>
                 <Textarea
-                  value={formData.story}
-                  onChange={(e) => setFormData({ ...formData, story: e.target.value })}
+                  value={formData.content}
+                  onChange={(e) => setFormData({ ...formData, content: e.target.value })}
                   required
                   placeholder="Tell us about your adoption journey..."
                   rows={6}
                 />
               </div>
               
-              <Button type="submit" size="lg" className="w-full">
-                Share the Love!
+              <Button type="submit" size="lg" className="w-full" disabled={!session}>
+                {session ? 'Share the Love!' : 'Sign In to Share'}
               </Button>
             </div>
           </form>

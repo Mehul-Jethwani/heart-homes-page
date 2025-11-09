@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import ContactUs from '@/components/ContactUs';
 import Footer from '@/components/Footer';
@@ -6,98 +6,61 @@ import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { MapPin } from 'lucide-react';
-import petDog1 from '@/assets/pet-dog1.jpg';
-import petCat1 from '@/assets/pet-cat1.jpg';
-import petDog2 from '@/assets/pet-dog2.jpg';
-import petRabbit1 from '@/assets/pet-rabbit1.jpg';
-import petCat2 from '@/assets/pet-cat2.jpg';
-import petDog3 from '@/assets/pet-dog3.jpg';
-import petDog4 from '@/assets/pet-dog4.jpg';
-import petCat3 from '@/assets/pet-cat3.jpg';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 
 interface Pet {
-  id: number;
+  id: string;
   name: string;
   type: string;
+  age: string;
   location: string;
-  status: 'Available' | 'Pending Adoption';
-  image: string;
+  status: string;
+  image_url: string;
 }
-
-const pets: Pet[] = [
-  {
-    id: 1,
-    name: 'Fein',
-    type: 'Dog',
-    location: 'Ghazipur',
-    status: 'Available',
-    image: petDog1,
-  },
-  {
-    id: 2,
-    name: 'Luna',
-    type: 'Cat',
-    location: 'Mumbai',
-    status: 'Pending Adoption',
-    image: petCat1,
-  },
-  {
-    id: 3,
-    name: 'Coco',
-    type: 'Rabbit',
-    location: 'Jaipur',
-    status: 'Available',
-    image: petRabbit1,
-  },
-  {
-    id: 4,
-    name: 'Charlie',
-    type: 'Dog',
-    location: 'Delhi',
-    status: 'Available',
-    image: petDog2,
-  },
-  {
-    id: 5,
-    name: 'Milo',
-    type: 'Cat',
-    location: 'Bangalore',
-    status: 'Available',
-    image: petCat2,
-  },
-  {
-    id: 6,
-    name: 'Rocky',
-    type: 'Dog',
-    location: 'Pune',
-    status: 'Available',
-    image: petDog3,
-  },
-  {
-    id: 7,
-    name: 'Buddy',
-    type: 'Dog',
-    location: 'Kolkata',
-    status: 'Pending Adoption',
-    image: petDog4,
-  },
-  {
-    id: 8,
-    name: 'Whiskers',
-    type: 'Cat',
-    location: 'Chennai',
-    status: 'Available',
-    image: petCat3,
-  },
-];
 
 const BrowsePets = () => {
   const [filter, setFilter] = useState<'all' | 'dog' | 'cat' | 'rabbit'>('all');
+  const [pets, setPets] = useState<Pet[]>([]);
+  const [loading, setLoading] = useState(true);
+  const { toast } = useToast();
+
+  useEffect(() => {
+    fetchPets();
+  }, []);
+
+  const fetchPets = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('pets')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setPets(data || []);
+    } catch (error: any) {
+      toast({
+        title: "Failed to load pets",
+        description: error.message,
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const filteredPets = pets.filter((pet) => {
     if (filter === 'all') return true;
     return pet.type.toLowerCase() === filter;
   });
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -156,7 +119,7 @@ const BrowsePets = () => {
               >
                 <div className="aspect-square overflow-hidden relative">
                   <img
-                    src={pet.image}
+                    src={pet.image_url}
                     alt={`${pet.name} - ${pet.type} available for adoption`}
                     className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
                   />
@@ -174,6 +137,7 @@ const BrowsePets = () => {
                       {pet.type}
                     </Badge>
                   </div>
+                  <p className="text-sm text-muted-foreground mb-2">{pet.age}</p>
                   <div className="flex items-center gap-2 text-muted-foreground">
                     <MapPin className="w-4 h-4 text-primary" />
                     <span className="text-sm">{pet.location}</span>

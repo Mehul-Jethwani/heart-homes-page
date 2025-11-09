@@ -11,7 +11,9 @@ import PetCare from "./pages/PetCare";
 import GetInvolved from "./pages/GetInvolved";
 import DonatePage from "./pages/DonatePage";
 import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 import NotFound from "./pages/NotFound";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -24,12 +26,13 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/browse-pets" element={<BrowsePets />} />
-          <Route path="/adopt" element={<Adopt />} />
+          <Route path="/adopt" element={<ProtectedRoute><Adopt /></ProtectedRoute>} />
           <Route path="/success-stories" element={<SuccessStories />} />
           <Route path="/pet-care" element={<PetCare />} />
-          <Route path="/get-involved" element={<GetInvolved />} />
+          <Route path="/get-involved" element={<ProtectedRoute><GetInvolved /></ProtectedRoute>} />
           <Route path="/donate" element={<DonatePage />} />
           <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/sign-up" element={<SignUp />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
