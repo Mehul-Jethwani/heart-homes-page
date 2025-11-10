@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { z } from 'https://deno.land/x/zod@v3.22.4/mod.ts';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -18,18 +19,31 @@ serve(async (req) => {
       Deno.env.get('SUPABASE_ANON_KEY') ?? ''
     );
 
-    const { name, email, message } = await req.json();
+    // Define validation schema
+    const contactSchema = z.object({
+      name: z.string().trim().min(1, 'Name is required').max(100, 'Name must be less than 100 characters'),
+      email: z.string().trim().email('Invalid email address').max(255, 'Email must be less than 255 characters'),
+      message: z.string().trim().min(10, 'Message must be at least 10 characters').max(2000, 'Message must be less than 2000 characters')
+    });
 
-    // Validate input
-    if (!name || !email || !message) {
+    // Parse and validate input
+    const rawData = await req.json();
+    const validationResult = contactSchema.safeParse(rawData);
+
+    if (!validationResult.success) {
       return new Response(
-        JSON.stringify({ error: 'Missing required fields' }),
+        JSON.stringify({ 
+          error: 'Invalid input', 
+          details: validationResult.error.issues.map(i => i.message)
+        }),
         { 
           status: 400, 
           headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
         }
       );
     }
+
+    const { name, email, message } = validationResult.data;
 
     // Insert contact form submission
     const { data, error } = await supabaseClient
@@ -43,7 +57,7 @@ serve(async (req) => {
       throw error;
     }
 
-    console.log('Contact form submitted:', data);
+    console.log('Contact form submitted successfully');
 
     return new Response(
       JSON.stringify({ success: true, data }),
